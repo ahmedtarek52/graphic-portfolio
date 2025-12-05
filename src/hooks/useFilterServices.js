@@ -14,7 +14,8 @@ return services.filter((s) => {
 if (filters.category !== 'all' && s.category !== filters.category) return false
 if (s.price < filters.minPrice || s.price > filters.maxPrice) return false
 if (!q) return true
-const hay = `${s.title} ${s.description} ${s.tags?.join(' ')}`.toLowerCase()
+// Updated to use shortDescription instead of description and handle missing tags
+const hay = `${s.title} ${s.shortDescription || ''}`.toLowerCase()
 return hay.includes(q)
 })
 }, [services, query, filters])

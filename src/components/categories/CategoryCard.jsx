@@ -1,11 +1,33 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom"
 
+export default function CategoryCard({ category }) {
+  return (
+    <Link
+      to={`/category/${category.slug}`}
+      className="
+        block w-[250px] h-[350px] rounded-2xl overflow-hidden  transition-all duration-300 relative group" >
+      {/* Image with overlay - full card */}
+      <img
+        src={category.icon || "/placeholder.svg"}
+        alt={category.name}
+        className="
+          absolute inset-0 w-full h-full object-cover
+          transition-transform duration-300
+          group-hover:scale-105
+        "
+      />
 
-export default function CategoryCard({ category }){
-return (
-<Link to={`/category/${category.slug}`} className="flex flex-col items-center gap-2 p-4 bg-white rounded shadow hover:shadow-md">
-<img src={category.icon} alt={category.name} className="w-12 h-12" />
-<div className="text-sm font-medium">{category.name}</div>
-</Link>
-)
+      {/* Black overlay layer */}
+      <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors duration-300" />
+
+      {/* Title button overlay - positioned at bottom */}
+      <div className="absolute inset-0 flex items-end justify-center p-4">
+        <div
+          className=" w-full text-white border border-gray-200py-3 p-4 rounded-lg font-bold text-lg transition-colors duration-300 truncate "
+        >
+          {category.name}
+        </div>
+      </div>
+    </Link>
+  )
 }

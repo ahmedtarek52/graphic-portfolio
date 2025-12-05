@@ -1,15 +1,64 @@
-import { useServices } from '../../context/ServicesContext'
-import CategoryCard from '../categories/CategoryCard'
+import { useRef } from "react";
+import { useServices } from "../../context/ServicesContext";
+import CategoryCard from "../categories/CategoryCard";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
+export default function CategoriesGrid() {
+  const { categories } = useServices();
+  const scrollRef = useRef(null);
 
-export default function CategoriesGrid(){
-const { categories } = useServices()
-return (
-<div className="max-w-7xl mx-auto px-4 py-10">
-<h2 className="text-2xl font-semibold mb-6">Explore Categories</h2>
-<div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-{categories.map(c=> <CategoryCard key={c.slug} category={c} />)}
-</div>
-</div>
-)
+  const scrollLeft = () => {
+    scrollRef.current.scrollBy({ left: -250, behavior: "smooth" });
+  };
+
+  const scrollRight = () => {
+    scrollRef.current.scrollBy({ left: 250, behavior: "smooth" });
+  };
+
+  return (
+    <div className="max-w-7xl mx-auto md:px-0 px-4 py-10 relative">
+
+      {/* Title */}
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-4xl font-heading font-semibold">Explore Categories</h2>
+
+        {/* Arrows */}
+        <div className="flex gap-3">
+          <button
+            onClick={scrollLeft}
+            aria-label="Scroll left"
+            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition"
+          >
+            <ChevronLeft size={20} />
+          </button>
+
+          <button
+            onClick={scrollRight}
+            aria-label="Scroll right"
+            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+      </div>
+
+      {/* Carousel Container */}
+      <div
+        ref={scrollRef}
+        className="
+          flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-2
+        "
+      >
+        {categories.map((c) => (
+          <div
+            key={c.slug}
+            className="min-w-[180px] flex-shrink-0"
+          >
+            <CategoryCard category={c} />
+          </div>
+        ))}
+      </div>
+
+    </div>
+  );
 }

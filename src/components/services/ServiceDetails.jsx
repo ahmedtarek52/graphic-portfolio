@@ -1,26 +1,193 @@
-export default function ServiceDetails({ service }){
-return (
-<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-<div className="lg:col-span-2">
-<img src={service.cover} alt={service.title} className="w-full h-80 object-cover rounded" />
-<h1 className="text-2xl font-bold mt-4">{service.title}</h1>
-<p className="text-neutral-600 mt-2">{service.description}</p>
+import { useState } from "react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+
+export default function ServiceDetails({ service }) {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [showAllGallery, setShowAllGallery] = useState(false);
+
+  // All images (cover + gallery)
+  const allImages = [service.cover, ...service.gallery];
+
+  // Gallery display: show max 4, rest hidden until View More clicked
+  const displayGallery = showAllGallery
+    ? service.gallery
+    : service.gallery.slice(0, 4);
+  const hasMore = service.gallery.length > 4;
+
+  const handleImageClick = (index) => {
+    setSelectedImageIndex(index + 1); // +1 because cover is at index 0
+    setShowModal(true);
+  };
+
+  const handleCoverClick = () => {
+    setSelectedImageIndex(0);
+    setShowModal(true);
+  };
+
+  const handlePrevImage = () => {
+    setSelectedImageIndex((prev) =>
+      prev === 0 ? allImages.length - 1 : prev - 1
+    );
+  };
+
+  const handleNextImage = () => {
+    setSelectedImageIndex((prev) =>
+      prev === allImages.length - 1 ? 0 : prev + 1
+    );
+  };
+  return (
 
 
-<section className="mt-6">
-<h4 className="font-semibold">Features</h4>
-<ul className="mt-2 list-disc pl-5 text-neutral-600">
-{service.features.map((f,i)=>(<li key={i}>{f}</li>))}
-</ul>
-</section>
+        <>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto p-6 border border-slate-200 bg-slate-50 rounded-xl overflow-hidden">
+            {/* Left: Cover Image */}
+            <div className="flex flex-col gap-4">
+              <button
+                onClick={handleCoverClick}
+                className="relative group overflow-hidden rounded-lg h-96 cursor-pointer"
+              >
+                <img
+                  src={service.cover || "/placeholder.svg"}
+                  alt={service.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+              </button>
 
+              <div>
+                <h1 className="text-3xl font-bold text-foreground">
+                  {service.title}
+                </h1>
+                <p className="text-muted-foreground mt-3 leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
+            </div>
 
-</div>
-{/* <aside className="p-4 bg-white rounded shadow">
-<div className="text-2xl font-bold">${service.price}</div>
-<div className="text-sm text-neutral-500 mt-2">Delivery time: 3 days</div>
-<button className="w-full mt-6 bg-indigo-600 text-white py-3 rounded">Order Now</button>
-</aside> */}
-</div>
-)
+            {/* Right: Gallery Grid */}
+            <div className="flex flex-col gap-4">
+              <div className="grid grid-cols-2 gap-4">
+                {displayGallery.map((img, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleImageClick(idx)}
+                    className="relative group overflow-hidden rounded-lg h-40 cursor-pointer"
+                  >
+                    <img
+                      src={img || "/placeholder.svg"}
+                      alt={`Gallery ${idx + 1}`}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <svg
+                          className="w-8 h-8 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M5 13l4 4L19 7"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            fill="none"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+
+              {/* View More Button */}
+              {hasMore && !showAllGallery && (
+                <button
+                  onClick={() => setShowAllGallery(true)}
+                  className="w-full py-3 bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-600 hover:to-blue-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105"
+                >
+                  View More ({service.gallery.length - 4} more)
+                </button>
+              )}
+
+              {/* Hide button when showing all */}
+              {showAllGallery && hasMore && (
+                <button
+                  onClick={() => setShowAllGallery(false)}
+                  className="w-full py-3 bg-muted hover:bg-muted/80 text-foreground font-semibold rounded-lg transition-colors duration-300"
+                >
+                  Show Less
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Image Modal */}
+          {showModal && (
+            <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+              <div className="relative w-full max-w-4xl">
+                {/* Close Button */}
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="absolute -top-10 right-0 text-white hover:text-gray-300 transition-colors z-10"
+                >
+                  <X size={32} />
+                </button>
+
+                {/* Main Image */}
+                <div className="relative bg-black rounded-2xl overflow-hidden">
+                  <img
+                    src={allImages[selectedImageIndex] || "/placeholder.svg"}
+                    alt={`Image ${selectedImageIndex + 1}`}
+                    className="w-full h-auto max-h-[70vh] object-contain"
+                  />
+
+                  {/* Left Arrow */}
+                  <button
+                    onClick={handlePrevImage}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-110 backdrop-blur-sm"
+                  >
+                    <ChevronLeft size={24} />
+                  </button>
+
+                  {/* Right Arrow */}
+                  <button
+                    onClick={handleNextImage}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-110 backdrop-blur-sm"
+                  >
+                    <ChevronRight size={24} />
+                  </button>
+
+                  {/* Image Counter */}
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 text-white px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                    {selectedImageIndex + 1} / {allImages.length}
+                  </div>
+                </div>
+
+                {/* Thumbnail Strip */}
+                <div className="flex gap-2 mt-4 overflow-x-auto pb-2">
+                  {allImages.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setSelectedImageIndex(idx)}
+                      className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
+                        idx === selectedImageIndex
+                          ? "border-white"
+                          : "border-white/30 hover:border-white/60"
+                      }`}
+                    >
+                      <img
+                        src={img || "/placeholder.svg"}
+                        alt={`Thumb ${idx + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </>
+      
+
+  );
 }

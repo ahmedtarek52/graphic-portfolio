@@ -1,20 +1,86 @@
 export const categories = [
   {
     id: 1,
-    name: "Graphic Design",
-    slug: "graphic-design",
-    icon: "https://fbcd.co/images/products/1c25752e8936645d16dbc22124789957_resize.jpg",
-    banner: "https://th.bing.com/th/id/OIP.9IhIjYBiP0RXbU_v1FTC2gHaHa?w=202&h=202&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1"
+    name: "Social Media Design",
+    slug: "social-media-design",
+    icon: "/assets/services/media/cover.jpg",
+    banner: "https://images.pexels.com/photos/6476580/pexels-photo-6476580.jpeg"
   },
   {
     id: 2,
+    name: "Logo Design",
+    slug: "logo-design",
+    icon: "https://cdn-icons-png.flaticon.com/512/1829/1829588.png",
+    banner: "https://images.pexels.com/photos/4386326/pexels-photo-4386326.jpeg"
+  },
+  {
+    id: 3,
+    name: "Branding",
+    slug: "branding",
+    icon: "https://cdn-icons-png.flaticon.com/512/2919/2919592.png",
+    banner: "https://images.pexels.com/photos/4350210/pexels-photo-4350210.jpeg"
+  },
+  {
+    id: 4,
+    name: "Printing",
+    slug: "printing",
+    icon: "https://cdn-icons-png.flaticon.com/512/1828/1828961.png",
+    banner: "https://images.pexels.com/photos/3224513/pexels-photo-3224513.jpeg"
+  },
+  {
+    id: 5,
+    name: "Video Motion",
+    slug: "video-motion",
+    icon: "https://cdn-icons-png.flaticon.com/512/3208/3208750.png",
+    banner: "https://images.pexels.com/photos/6402643/pexels-photo-6402643.jpeg"
+  },
+  {
+    id: 6,
+    name: "Video Editing",
+    slug: "video-editing",
+    icon: "https://cdn-icons-png.flaticon.com/512/126/126485.png",
+    banner: "https://images.pexels.com/photos/6899921/pexels-photo-6899921.jpeg"
+  },
+  {
+    id: 7,
+    name: "Content Writing",
+    slug: "content-writing",
+    icon: "https://cdn-icons-png.flaticon.com/512/1828/1828884.png",
+    banner: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg"
+  },
+  {
+    id: 8,
+    name: "Page Management",
+    slug: "page-management",
+    icon: "https://cdn-icons-png.flaticon.com/512/942/942748.png",
+    banner: "https://images.pexels.com/photos/3184357/pexels-photo-3184357.jpeg"
+  },
+  {
+    id: 9,
     name: "Web Development",
     slug: "web-development",
-    icon: "https://th.bing.com/th/id/OIP.gxG27TpgEJQa2X2x1gSsEQHaDz?w=330&h=179&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1",
-    banner: "https://tse3.mm.bing.net/th/id/OIP.iQSWhNO0_vPwc_TmFJnC7QHaEM?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
+    icon: "https://cdn-icons-png.flaticon.com/512/919/919854.png",
+    banner: "https://images.pexels.com/photos/4974914/pexels-photo-4974914.jpeg"
   },
-  { id: 3, name: 'Digital Marketing',
-    slug: 'digital-marketing',
-    icon: 'https://th.bing.com/th/id/OIP._10fvMKMg2gZOlnSCTJoygHaE8?w=253&h=180&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1',
-    banner: 'https://th.bing.com/th/id/OIP.Y_wPgzXNDL3yBryuGGUvOAHaFj?&w=160&h=240&c=7&dpr=1.3&pid=ImgDet&o=7&rm=3' }
+  {
+    id: 10,
+    name: "UI & UX",
+    slug: "ui-ux",
+    icon: "https://cdn-icons-png.flaticon.com/512/2975/2975175.png",
+    banner: "https://images.pexels.com/photos/3184633/pexels-photo-3184633.jpeg"
+  },
+  {
+    id: 11,
+    name: "3D Modeling",
+    slug: "3d-modeling",
+    icon: "https://cdn-icons-png.flaticon.com/512/619/619153.png",
+    banner: "https://images.pexels.com/photos/5699731/pexels-photo-5699731.jpeg"
+  },
+  {
+    id: 12,
+    name: "Ads & Campaigns",
+    slug: "ads",
+    icon: "https://cdn-icons-png.flaticon.com/512/4149/4149675.png",
+    banner: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg"
+  }
 ];
