@@ -24,6 +24,12 @@ export default {
         card: '#f9fafb',
         border: '#e5e7eb',
       },
+      safelist: [
+    "purple-gradient",
+    "purple-gradient-hover",
+    "purple-text",
+    "purple-outline"
+  ],
       transitionDuration: {
         DEFAULT: '300ms',
       },

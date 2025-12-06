@@ -64,3 +64,9 @@ img{display:block;max-width:100%}
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.purple-outline {
+  border: 2px solid transparent;
+  background: linear-gradient(#fff, #fff) padding-box,
+              linear-gradient(to right, #a855f7, #9333ea, #7e22ce) border-box;
+}
