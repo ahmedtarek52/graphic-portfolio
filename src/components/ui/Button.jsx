@@ -1,4 +1,6 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Button({
   children,
@@ -6,7 +8,14 @@ export default function Button({
   className = "",
   onClick,
   type = "button",
+  to
 }) {
+  const navigate = useNavigate();
+
+  const handleClick = (e) => {
+    if (onClick) onClick(e);
+    if (to) navigate(to);
+  };
   const base = "px-5 py-2.5 rounded-full font-medium transition-all duration-300 cursor-pointer";
 
   const variants = {
@@ -23,7 +32,7 @@ export default function Button({
   return (
     <button
       type={type}
-      onClick={onClick}
+      onClick={handleClick}
       className={`${base} ${variants[variant]} ${className}`}
     >
       {children}

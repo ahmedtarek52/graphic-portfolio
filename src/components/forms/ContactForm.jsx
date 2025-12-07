@@ -1,25 +1,8 @@
-
 import { useState } from "react"
-// import { Button } from "@/components/ui/button"
-// import { Input } from "@/components/ui/input"
-// import { Textarea } from "@/components/ui/textarea"
+import Button from "../ui/Button"
+import Input from "../ui/Input"
+import Textarea from "../ui/Textarea"
 import { AlertCircle, CheckCircle2 } from "lucide-react"
-
-// interface FormState {
-//   name: string
-//   email: string
-//   phone: string
-//   subject: string
-//   message: string
-// }
-
-// interface FormErrors {
-//   name?: string
-//   email?: string
-//   phone?: string
-//   subject?: string
-//   message?: string
-// }
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -68,23 +51,23 @@ export default function ContactForm() {
   }
 
   // Handle change
-  const handleChange = () => {
+  const handleChange = (e) => {
     const { name, value } = e.target
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }))
     // Clear error for this field when user starts typing
-    // if (errors[name as keyof errors]) {
-    //   setErrors((prev) => ({
-    //     ...prev,
-    //     [name]: undefined,
-    //   }))
-    // }
+    if (errors[name]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: undefined,
+      }))
+    }
   }
 
   // Handle submit
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     if (!validateForm()) {
@@ -156,16 +139,16 @@ export default function ContactForm() {
             *
           </span>
         </label>
-        <input
+        <Input
           id="name"
           name="name"
           type="text"
           value={formData.name}
           onChange={handleChange}
           placeholder="Your full name"
-          aria-required="true"
-          aria-invalid={!!errors.name}
-          aria-describedby={errors.name ? "name-error" : undefined}
+          ariaRequired="true"
+          ariaInvalid={!!errors.name}
+          ariaDescribedby={errors.name ? "name-error" : undefined}
           className={errors.name ? "border-red-500" : ""}
         />
         {errors.name && (
@@ -183,16 +166,16 @@ export default function ContactForm() {
             *
           </span>
         </label>
-        <input
+        <Input
           id="email"
           name="email"
           type="email"
           value={formData.email}
           onChange={handleChange}
           placeholder="your.email@example.com"
-          aria-required="true"
-          aria-invalid={!!errors.email}
-          aria-describedby={errors.email ? "email-error" : undefined}
+          ariaRequired="true"
+          ariaInvalid={!!errors.email}
+          ariaDescribedby={errors.email ? "email-error" : undefined}
           className={errors.email ? "border-red-500" : ""}
         />
         {errors.email && (
@@ -207,15 +190,15 @@ export default function ContactForm() {
         <label htmlFor="phone" className="block text-sm font-medium mb-2">
           Phone Number <span className="text-gray-400">(Optional)</span>
         </label>
-        <input
+        <Input
           id="phone"
           name="phone"
           type="tel"
           value={formData.phone}
           onChange={handleChange}
           placeholder="+1 (555) 123-4567"
-          aria-invalid={!!errors.phone}
-          aria-describedby={errors.phone ? "phone-error" : undefined}
+          ariaInvalid={!!errors.phone}
+          ariaDescribedby={errors.phone ? "phone-error" : undefined}
           className={errors.phone ? "border-red-500" : ""}
         />
         {errors.phone && (
@@ -233,16 +216,16 @@ export default function ContactForm() {
             *
           </span>
         </label>
-        <input
+        <Input
           id="subject"
           name="subject"
           type="text"
           value={formData.subject}
           onChange={handleChange}
           placeholder="What is this about?"
-          aria-required="true"
-          aria-invalid={!!errors.subject}
-          aria-describedby={errors.subject ? "subject-error" : undefined}
+          ariaRequired="true"
+          ariaInvalid={!!errors.subject}
+          ariaDescribedby={errors.subject ? "subject-error" : undefined}
           className={errors.subject ? "border-red-500" : ""}
         />
         {errors.subject && (
@@ -260,17 +243,17 @@ export default function ContactForm() {
             *
           </span>
         </label>
-        <textarea
+        <Textarea
           id="message"
           name="message"
           value={formData.message}
           onChange={handleChange}
           placeholder="Tell us more about your project..."
           rows={5}
-          aria-required="true"
-          aria-invalid={!!errors.message}
-          aria-describedby={errors.message ? "message-error" : undefined}
-          className={`resize-none ${errors.message ? "border-red-500" : ""}`}
+          ariaRequired="true"
+          ariaInvalid={!!errors.message}
+          ariaDescribedby={errors.message ? "message-error" : undefined}
+          className={errors.message ? "border-red-500" : ""}
         />
         {errors.message && (
           <p id="message-error" className="text-red-500 text-sm mt-1" role="alert">
@@ -280,10 +263,11 @@ export default function ContactForm() {
       </div>
 
       {/* Submit Button */}
-      <button
+      <Button
         type="submit"
         disabled={isLoading}
-        className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-3 rounded-lg transition-all"
+        className="w-full flex justify-center items-center"
+        aria-label="Submit"
         aria-busy={isLoading}
       >
         {isLoading ? (
@@ -294,7 +278,7 @@ export default function ContactForm() {
         ) : (
           "Send Message"
         )}
-      </button>
+      </Button>
 
       {/* Accessibility Info */}
       <p className="text-xs text-muted-foreground">

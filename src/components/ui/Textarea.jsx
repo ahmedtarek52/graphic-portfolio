@@ -1,12 +1,12 @@
 import React from 'react'
 
-const Input = ({ 
+const Textarea = ({ 
   id, 
   name, 
-  type = 'text', 
   value, 
   onChange, 
   placeholder, 
+  rows = 5, 
   className = '', 
   ariaRequired, 
   ariaInvalid, 
@@ -14,20 +14,20 @@ const Input = ({
   ...props 
 }) => {
   return (
-    <input
+    <textarea
       id={id}
       name={name}
-      type={type}
       value={value}
       onChange={onChange}
       placeholder={placeholder}
+      rows={rows}
       aria-required={ariaRequired}
       aria-invalid={ariaInvalid}
       aria-describedby={ariaDescribedby}
-      className={`w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all ${className}`}
+      className={`w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all resize-none ${className}`}
       {...props}
     />
   )
 }
 
-export default Input
+export default Textarea

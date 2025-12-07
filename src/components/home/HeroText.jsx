@@ -29,11 +29,11 @@ export const HeroText = () => {
               Pre-designed by top talent. Just add your personal touch and transform your vision into reality.
             </p>
 
-            <div className="flex flex-wrap gap-4">
-              <Button >
+            
+              <Button to="/contact" >
                 Get Started
               </Button>
-            </div>
+            
 
             {/* Trust indicators */}
             <div className="flex items-center gap-6 pt-4">

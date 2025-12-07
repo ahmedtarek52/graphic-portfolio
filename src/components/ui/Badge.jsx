@@ -14,7 +14,7 @@ const Badge = ( {title, description ,btnText , className = ""}) => {
               {description || "Join countless satisfied clients who have transformed their brands with our expert design and marketing services."}
             </p>
 
-            <Button size="lg" className="inline-flex items-center gap-2 space-x-2">
+            <Button size="lg" className="inline-flex items-center gap-2 space-x-2" to="/contact">
               {btnText || "Get Started Now"}
               <ArrowRight className="w-5 h-5" />
             </Button>
