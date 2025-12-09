@@ -6,6 +6,7 @@ export const services = [
     category: "social-media-design",
     cover: "/assets/services/media/post-cover.jpg",
     description: "High-quality social media designs for Instagram, Facebook, and more.",
+    tags: ["medical","agriculture","food","industry"],
     price: 25,
     rating: 4.8,
     revisions: 3,
@@ -24,6 +25,7 @@ export const services = [
     category: "logo-design",
     cover: "https://images.pexels.com/photos/4386326/pexels-photo-4386326.jpeg",
     description: "Unique and memorable logo design for brands and businesses.",
+    tags: ["startup","corporate","restaurant","ecommerce"],
     price: 40,
     rating: 4.9,
     revisions: 5,
@@ -42,6 +44,7 @@ export const services = [
     category: "branding",
     cover: "https://images.pexels.com/photos/4350210/pexels-photo-4350210.jpeg",
     description: "Complete branding package with color palette, typography, and identity.",
+    tags: ["corporate","startup","fashion","food"],
     price: 80,
     rating: 4.9,
     revisions: 4,
@@ -60,6 +63,7 @@ export const services = [
     category: "printing",
     cover: "https://images.pexels.com/photos/3224513/pexels-photo-3224513.jpeg",
     description: "Professional printing designs for businesses and events.",
+    tags: ["events","corporate","brochure","flyer"],
     price: 20,
     rating: 4.7,
     revisions: 2,
@@ -78,6 +82,7 @@ export const services = [
     category: "video-motion",
     cover: "https://images.pexels.com/photos/6402643/pexels-photo-6402643.jpeg",
     description: "Modern motion graphics videos for ads, explainers, and social media.",
+    tags: ["ads","explainer","social","promo"],
     price: 100,
     rating: 4.8,
     revisions: 3,
@@ -96,6 +101,7 @@ export const services = [
     category: "video-editing",
     cover: "https://images.pexels.com/photos/6899921/pexels-photo-6899921.jpeg",
     description: "Smooth editing, transitions, color grading, and sound enhancements.",
+    tags: ["events","promo","music","corporate"],
     price: 45,
     rating: 4.7,
     revisions: 3,
@@ -114,6 +120,7 @@ export const services = [
     category: "content-writing",
     cover: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg",
     description: "Blog posts, articles, and website content written professionally.",
+    tags: ["seo","blog","technical","creative"],
     price: 18,
     rating: 4.6,
     revisions: 2,
@@ -132,6 +139,7 @@ export const services = [
     category: "page-management",
     cover: "https://images.pexels.com/photos/3184357/pexels-photo-3184357.jpeg",
     description: "Daily posting, content planning, and follower engagement.",
+    tags: ["small-business","ecommerce","influencer"],
     price: 50,
     rating: 4.7,
     revisions: 5,
@@ -150,6 +158,7 @@ export const services = [
     category: "web-development",
     cover: "https://images.pexels.com/photos/4974914/pexels-photo-4974914.jpeg",
     description: "Responsive websites using modern technologies and clean code.",
+    tags: ["education","real-estate","ecommerce","portfolio"],
     price: 150,
     rating: 5.0,
     revisions: 2,
@@ -168,6 +177,7 @@ export const services = [
     category: "ui-ux",
     cover: "https://images.pexels.com/photos/3184633/pexels-photo-3184633.jpeg",
     description: "User-centered UI/UX designs for mobile and web applications.",
+    tags: ["saas","mobile","enterprise","startup"],
     price: 70,
     rating: 4.9,
     revisions: 3,
@@ -186,6 +196,7 @@ export const services = [
     category: "3d-modeling",
     cover: "https://images.pexels.com/photos/5699731/pexels-photo-5699731.jpeg",
     description: "High-quality 3D models for products, architecture, and animation.",
+    tags: ["product","architecture","game","visualization"],
     price: 95,
     rating: 4.8,
     revisions: 2,
@@ -204,6 +215,7 @@ export const services = [
     category: "ads",
     cover: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg",
     description: "Facebook & Google ads setup with audience targeting and analytics.",
+    tags: ["facebook","google","social","search"],
     price: 40,
     rating: 4.6,
     revisions: 2,
@@ -213,6 +225,70 @@ export const services = [
       "https://images.pexels.com/photos/3183170/pexels-photo-3183170.jpeg",
       "https://images.pexels.com/photos/3183180/pexels-photo-3183180.jpeg",
       "https://images.pexels.com/photos/3183190/pexels-photo-3183190.jpeg"
+    ]
+  }
+,
+  // Additional sample services (posts/projects) for testing taxonomy filters
+  {
+    id: 13,
+    title: "Social Media Posts for Medical Clinics",
+    slug: "social-media-medical",
+    category: "social-media-design",
+    cover: "/assets/services/media/social-medical.jpg",
+    description: "Templates and posts tailored for medical clinics and healthcare.",
+    tags: ["medical","health","clinic"],
+    price: 30,
+    rating: 4.7,
+    revisions: 2,
+    gallery: [
+      "/assets/services/media/social-1.jpg",
+      "/assets/services/media/social-2.jpg"
+    ]
+  },
+  {
+    id: 14,
+    title: "Social Media Campaign for Food Brands",
+    slug: "social-media-food",
+    category: "social-media-design",
+    cover: "/assets/services/media/social-food.jpg",
+    description: "Food photography and promotional posts for restaurants and brands.",
+    tags: ["food","restaurant","ecommerce"],
+    price: 35,
+    rating: 4.6,
+    revisions: 3,
+    gallery: [
+      "/assets/services/media/social-3.jpg",
+      "/assets/services/media/social-4.jpg"
+    ]
+  },
+  {
+    id: 15,
+    title: "Educational Website for Schools",
+    slug: "web-education",
+    category: "web-development",
+    cover: "https://images.pexels.com/photos/4974914/pexels-photo-4974914.jpeg",
+    description: "Student portal, courses, and school management website.",
+    tags: ["education","school","portal"],
+    price: 200,
+    rating: 4.9,
+    revisions: 3,
+    gallery: [
+      "https://images.pexels.com/photos/4974914/pexels-photo-4974914.jpeg"
+    ]
+  },
+  {
+    id: 16,
+    title: "Real Estate Listing Website",
+    slug: "web-real-estate",
+    category: "web-development",
+    cover: "https://images.pexels.com/photos/4974925/pexels-photo-4974925.jpeg",
+    description: "Property listings, search filters and contact forms for real estate.",
+    tags: ["real-estate","property","marketplace"],
+    price: 220,
+    rating: 4.8,
+    revisions: 2,
+    gallery: [
+      "https://images.pexels.com/photos/4974925/pexels-photo-4974925.jpeg"
     ]
   }
 ];

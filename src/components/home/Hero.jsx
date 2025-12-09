@@ -29,6 +29,7 @@ export default function Hero() {
           <img
             key={i}
             src={img}
+            loading="lazy"
             className={`
               absolute inset-0 w-full h-full object-cover transition-all duration-[2500ms] ease-out
               ${i === index ? "opacity-100 scale-110" : "opacity-0 scale-100"}

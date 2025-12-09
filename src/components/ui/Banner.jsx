@@ -11,6 +11,7 @@ export default function Banner({ bg, title, description }) {
       <img
         src={bg}
         alt={title}
+        loading="lazy"
         className="absolute inset-0 w-full h-full object-cover scale-105 animate-slow-zoom"
       />
 

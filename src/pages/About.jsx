@@ -3,6 +3,7 @@ import aboutBanner from "../../public/assets/images/about-us.jpg";
 import Badge from "../components/ui/Badge";
 import { ArrowRight, Zap, Heart, Target, Users } from "lucide-react"
 import Stats from "../components/home/Stats";
+import ChooseUs from "../components/home/ChooseUs";
 
 export default function About(){
      const teamMembers = [
@@ -98,6 +99,7 @@ return (
               <img
                 src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop"
                 alt="Team collaboration"
+                loading="lazy"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
@@ -163,6 +165,7 @@ return (
                     <img
                       src={member.image || "/placeholder.svg"}
                       alt={member.name}
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -188,7 +191,6 @@ return (
             </div>
           </div>
         </section>
-
 
 
 

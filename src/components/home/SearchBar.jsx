@@ -1,17 +1,39 @@
 import { useSearch } from '../../context/SearchContext'
 import { useNavigate } from 'react-router-dom'
 import { Search } from 'lucide-react'
+import { useServices } from '../../context/ServicesContext'
 
 
 export default function SearchBar() {
 const { query, setQuery } = useSearch()
 const navigate = useNavigate()
+const { services, categories } = useServices()
 
 
 function onSubmit(e) {
   e.preventDefault()
-  // Navigate to categories page with search query
-  navigate('/categories')
+  const q = query.trim().toLowerCase()
+  if(!q){
+    navigate('/categories')
+    return
+  }
+
+  // Try to find a matching category by slug or name
+  const cat = categories.find(c=> c.slug===q || (c.name && c.name.toLowerCase().includes(q)))
+  if(cat){
+    navigate(`/category/${cat.slug}`)
+    return
+  }
+
+  // Try to find a matching service by slug or title
+  const svc = services.find(s=> s.slug===q || (s.title && s.title.toLowerCase().includes(q)))
+  if(svc){
+    navigate(`/service/${svc.slug}`)
+    return
+  }
+
+  // fallback: go to categories with query param
+  navigate(`/categories?q=${encodeURIComponent(query)}`)
 }
 
 

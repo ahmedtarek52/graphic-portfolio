@@ -50,6 +50,7 @@ export default function ServiceDetails({ service }) {
                 <img
                   src={service.cover || "/placeholder.svg"}
                   alt={service.title}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
@@ -77,6 +78,7 @@ export default function ServiceDetails({ service }) {
                     <img
                       src={img || "/placeholder.svg"}
                       alt={`Gallery ${idx + 1}`}
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
@@ -138,6 +140,7 @@ export default function ServiceDetails({ service }) {
                   <img
                     src={allImages[selectedImageIndex] || "/placeholder.svg"}
                     alt={`Image ${selectedImageIndex + 1}`}
+                    loading="lazy"
                     className="w-full h-auto max-h-[70vh] object-contain"
                   />
 
@@ -178,6 +181,7 @@ export default function ServiceDetails({ service }) {
                       <img
                         src={img || "/placeholder.svg"}
                         alt={`Thumb ${idx + 1}`}
+                        loading="lazy"
                         className="w-full h-full object-cover"
                       />
                     </button>

@@ -9,6 +9,7 @@ return (
   <img 
     src={service.cover} 
     alt={service.title} 
+    loading="lazy"
     className="w-full h-80 object-cover" 
   />
   <div className="p-4">

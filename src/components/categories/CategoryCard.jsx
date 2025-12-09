@@ -10,6 +10,7 @@ export default function CategoryCard({ category }) {
       <img
         src={category.icon || "/placeholder.svg"}
         alt={category.name}
+        loading="lazy"
         className="
           absolute inset-0 w-full h-full object-cover
           transition-transform duration-300

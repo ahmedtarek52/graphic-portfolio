@@ -16,7 +16,7 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3">
-          <img src="/assets/icons/logo.png" alt="Logo" className="w-9 h-9" />
+          <img src="/assets/icons/logo.png" alt="Logo" loading="lazy" className="w-9 h-9" />
           <span className="font-semibold text-lg">YourCompany</span>
         </Link>
         {/* Desktop Menu */}
