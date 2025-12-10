@@ -6,6 +6,7 @@ import Stats from '../components/home/Stats'
 import ChooseUs from '../components/home/ChooseUs'
 import { HeroText } from '../components/home/HeroText'
 import Badge from '../components/ui/Badge'
+import CategoriesList from '../components/home/CategoriesList'
 
 
 export default function Home(){
@@ -19,6 +20,7 @@ return (
  <ChooseUs/>
  <Badge/>
  <Stats/>
+ <CategoriesList/>
 
 </div>
 )

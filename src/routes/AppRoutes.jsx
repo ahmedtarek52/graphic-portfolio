@@ -6,7 +6,7 @@ import ServicePage from '../pages/ServicePage'
 import About from '../pages/About'
 import Contact from '../pages/Contact'
 import NotFound from '../pages/NotFound'
-
+import AdminRoutes from "./AdminRoutes";
 
 export default function AppRoutes() {
 return (
@@ -16,6 +16,7 @@ return (
 <Route path="/category/:slug" element={<CategoryPage />} />
 <Route path="/service/:slug" element={<ServicePage />} />
 <Route path="/about" element={<About />} />
+<Route path="/admin/*" element={<AdminRoutes />} />
 <Route path="/contact" element={<Contact />} />
 	<Route path="/404" element={<NotFound />} />
 	<Route path="*" element={<NotFound />} />
