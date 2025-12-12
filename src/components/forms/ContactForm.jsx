@@ -50,31 +50,20 @@ export default function ContactForm() {
     return Object.keys(newErrors).length === 0
   }
 
-  // Handle change
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
-    // Clear error for this field when user starts typing
+    setFormData((prev) => ({ ...prev, [name]: value }))
+
+    // Clear error when user starts typing
     if (errors[name]) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: undefined,
-      }))
+      setErrors((prev) => ({ ...prev, [name]: "" }))
     }
   }
 
-  // Handle submit
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!validateForm()) {
-      setSubmitStatus("error")
-      setSubmitMessage("Please fix the errors above")
-      return
-    }
+    if (!validateForm()) return
 
     setIsLoading(true)
     setSubmitStatus("idle")
@@ -82,9 +71,8 @@ export default function ContactForm() {
     try {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1500))
-
-      setSubmitStatus("success")
-      setSubmitMessage("Message sent successfully! We will get back to you soon.")
+      
+      // Reset form
       setFormData({
         name: "",
         email: "",
@@ -92,57 +80,42 @@ export default function ContactForm() {
         subject: "",
         message: "",
       })
-
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setSubmitStatus("idle")
-        setSubmitMessage("")
-      }, 5000)
-    } catch {
+      
+      setSubmitStatus("success")
+      setSubmitMessage("Thank you! Your message has been sent successfully.")
+    } catch (error) {
       setSubmitStatus("error")
-      setSubmitMessage("Failed to send message. Please try again.")
+      setSubmitMessage("Oops! Something went wrong. Please try again.")
     } finally {
       setIsLoading(false)
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6" aria-label="Contact form">
-      {/* Status Messages */}
+    <form onSubmit={handleSubmit} className="space-y-5 max-w-2xl mx-auto" noValidate>
+      {/* Success Message */}
       {submitStatus === "success" && (
-        <div
-          className="p-4 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 flex gap-3"
-          role="alert"
-          aria-live="polite"
-        >
-          <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-          <p className="text-green-800 dark:text-green-200 text-sm">{submitMessage}</p>
+        <div className="p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3" role="alert">
+          <CheckCircle2 className="text-green-600 mt-0.5 flex-shrink-0" size={20} />
+          <p className="text-green-800">{submitMessage}</p>
         </div>
       )}
 
+      {/* Error Message */}
       {submitStatus === "error" && (
-        <div
-          className="p-4 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 flex gap-3"
-          role="alert"
-          aria-live="polite"
-        >
-          <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-          <p className="text-red-800 dark:text-red-200 text-sm">{submitMessage}</p>
+        <div className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3" role="alert">
+          <AlertCircle className="text-red-600 mt-0.5 flex-shrink-0" size={20} />
+          <p className="text-red-800">{submitMessage}</p>
         </div>
       )}
 
       {/* Name Field */}
       <div>
-        <label htmlFor="name" className="block text-sm font-medium mb-2">
-          Full Name{" "}
-          <span className="text-red-500" aria-label="required">
-            *
-          </span>
-        </label>
         <Input
           id="name"
           name="name"
           type="text"
+          label="Full Name *"
           value={formData.name}
           onChange={handleChange}
           placeholder="Your full name"
@@ -160,16 +133,11 @@ export default function ContactForm() {
 
       {/* Email Field */}
       <div>
-        <label htmlFor="email" className="block text-sm font-medium mb-2">
-          Email Address{" "}
-          <span className="text-red-500" aria-label="required">
-            *
-          </span>
-        </label>
         <Input
           id="email"
           name="email"
           type="email"
+          label="Email Address *"
           value={formData.email}
           onChange={handleChange}
           placeholder="your.email@example.com"
@@ -187,13 +155,11 @@ export default function ContactForm() {
 
       {/* Phone Field */}
       <div>
-        <label htmlFor="phone" className="block text-sm font-medium mb-2">
-          Phone Number <span className="text-gray-400">(Optional)</span>
-        </label>
         <Input
           id="phone"
           name="phone"
           type="tel"
+          label="Phone Number (Optional)"
           value={formData.phone}
           onChange={handleChange}
           placeholder="+1 (555) 123-4567"
@@ -210,16 +176,11 @@ export default function ContactForm() {
 
       {/* Subject Field */}
       <div>
-        <label htmlFor="subject" className="block text-sm font-medium mb-2">
-          Subject{" "}
-          <span className="text-red-500" aria-label="required">
-            *
-          </span>
-        </label>
         <Input
           id="subject"
           name="subject"
           type="text"
+          label="Subject *"
           value={formData.subject}
           onChange={handleChange}
           placeholder="What is this about?"
@@ -237,15 +198,10 @@ export default function ContactForm() {
 
       {/* Message Field */}
       <div>
-        <label htmlFor="message" className="block text-sm font-medium mb-2">
-          Message{" "}
-          <span className="text-red-500" aria-label="required">
-            *
-          </span>
-        </label>
         <Textarea
           id="message"
           name="message"
+          label="Message *"
           value={formData.message}
           onChange={handleChange}
           placeholder="Tell us more about your project..."

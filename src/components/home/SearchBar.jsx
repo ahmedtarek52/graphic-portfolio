@@ -1,13 +1,13 @@
 import { useSearch } from '../../context/SearchContext'
 import { useNavigate } from 'react-router-dom'
 import { Search } from 'lucide-react'
-import { useServices } from '../../context/ServicesContext'
+import { useServicesContext } from '../../context/ServicesContext'
 
 
 export default function SearchBar() {
 const { query, setQuery } = useSearch()
 const navigate = useNavigate()
-const { services, categories } = useServices()
+const { services, categories } = useServicesContext()
 
 
 function onSubmit(e) {

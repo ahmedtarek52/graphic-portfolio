@@ -7,7 +7,7 @@ return (
   to={`/service/${service.slug}`} 
   className="  block bg-white rounded-2xl shadow-sm overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100">
   <img 
-    src={service.cover} 
+    src={service.coverUrl} 
     alt={service.title} 
     loading="lazy"
     className="w-full h-80 object-cover" 

@@ -1,9 +1,9 @@
-import { useServices } from '../../context/ServicesContext'
+import { useServicesContext } from '../../context/ServicesContext'
 import ServiceCard from '../services/ServiceCard'
 
 
 export default function TrendingServices(){
-const { services } = useServices()
+const { services } = useServicesContext()
 const trending = services.slice(0,6)
 return (
 <section className="max-w-7xl mx-auto px-4 py-10">

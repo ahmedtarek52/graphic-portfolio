@@ -1,5 +1,5 @@
 import { useParams, useLocation } from 'react-router-dom'
-import { useServices } from '../context/ServicesContext'
+import { useServicesContext } from '../context/ServicesContext'
 import ServiceCard from '../components/services/ServiceCard'
 import Banner from '../components/ui/Banner'
 import CategoryFilter from '../components/categories/CategoryFilter'
@@ -10,7 +10,7 @@ import { useSearch } from '../context/SearchContext'
 
 export default function CategoryPage(){
   const { slug } = useParams()
-  const { services, categories } = useServices()
+  const { services, categories } = useServicesContext()
   const category = categories.find(c=>c.slug===slug)
   const list = services.filter(s=>s.category===slug)
 

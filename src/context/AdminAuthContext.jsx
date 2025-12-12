@@ -1,12 +1,7 @@
-// src/context/AdminAuthContext.jsx
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../firebase/config";
-import {
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut,
-  getIdTokenResult,
-} from "firebase/auth";
+import { createContext, useContext, useEffect, useState } from "react";
+import { auth, db } from "../firebase/config";
+import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 
 const AdminAuthContext = createContext();
 
@@ -21,20 +16,30 @@ export function AdminAuthProvider({ children }) {
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (u) => {
+      // debug: log auth state changes
+      // eslint-disable-next-line no-console
+      console.log("onAuthStateChanged -> user:", u);
       setUser(u);
-      setLoading(true);
+
       if (u) {
         try {
-          const token = await getIdTokenResult(u, true);
-          setIsAdmin(Boolean(token.claims?.admin)); // set admin via custom claim
+          // Check admins collection in Firestore for admin status
+          const adminDoc = await getDoc(doc(db, "admins", u.uid));
+          // eslint-disable-next-line no-console
+          console.log("adminDoc exists:", adminDoc.exists(), "isAdmin:", adminDoc.exists() && adminDoc.data()?.isAdmin === true);
+          setIsAdmin(adminDoc.exists() && adminDoc.data()?.isAdmin === true);
         } catch (err) {
+          // eslint-disable-next-line no-console
+          console.error("Error fetching admin doc:", err);
           setIsAdmin(false);
         }
       } else {
         setIsAdmin(false);
       }
+
       setLoading(false);
     });
+
     return () => unsub();
   }, []);
 
@@ -42,14 +47,10 @@ export function AdminAuthProvider({ children }) {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const logout = () => {
-    return signOut(auth);
-  };
-
-  const value = { user, isAdmin, loading, login, logout };
+  const logout = () => signOut(auth);
 
   return (
-    <AdminAuthContext.Provider value={value}>
+    <AdminAuthContext.Provider value={{ user, isAdmin, loading, login, logout }}>
       {children}
     </AdminAuthContext.Provider>
   );

@@ -17,7 +17,7 @@ export default function FileUploader({ multiple = false, onUploadComplete }) {
       onUploadComplete && onUploadComplete(multiple ? uploaded : uploaded[0]);
     } catch (err) {
       console.error("upload error", err);
-      alert("Upload failed");
+      alert(`Upload failed: ${err.message || "Unknown error"}`);
     } finally {
       setUploading(false);
     }
@@ -27,7 +27,7 @@ export default function FileUploader({ multiple = false, onUploadComplete }) {
     <div className="flex items-center gap-3">
       <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-md bg-purple-600 text-white">
         {uploading ? "Uploading..." : "Choose Image"}
-        <input type="file" multiple={multiple} onChange={handleFiles} className="hidden" />
+        <input type="file" multiple={multiple} onChange={handleFiles} className="hidden" accept="image/*" />
       </label>
     </div>
   );

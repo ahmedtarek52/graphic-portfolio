@@ -7,7 +7,7 @@ export default function ServiceDetails({ service }) {
   const [showAllGallery, setShowAllGallery] = useState(false);
 
   // All images (cover + gallery)
-  const allImages = [service.cover, ...service.gallery];
+  const allImages = [service.coverUrl, ...service.gallery];
 
   // Gallery display: show max 4, rest hidden until View More clicked
   const displayGallery = showAllGallery
@@ -48,7 +48,7 @@ export default function ServiceDetails({ service }) {
                 className="relative group overflow-hidden rounded-lg h-96 cursor-pointer"
               >
                 <img
-                  src={service.cover || "/placeholder.svg"}
+                  src={service.coverUrl || "/placeholder.svg"}
                   alt={service.title}
                   loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"

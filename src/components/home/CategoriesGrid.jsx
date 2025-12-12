@@ -1,10 +1,10 @@
 import { useRef } from "react";
-import { useServices } from "../../context/ServicesContext";
+import { useServicesContext } from "../../context/ServicesContext";
 import CategoryCard from "../categories/CategoryCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function CategoriesGrid() {
-  const { categories } = useServices();
+  const { categories } = useServicesContext();
   const scrollRef = useRef(null);
 
   const scrollLeft = () => {

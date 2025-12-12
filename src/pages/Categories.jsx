@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useSearch } from '../context/SearchContext'
-import { useServices } from '../context/ServicesContext'
+import { useServicesContext } from '../context/ServicesContext'
 import CategoriesGrid from '../components/home/CategoriesGrid'
 import ServiceList from '../components/services/ServiceList'
 

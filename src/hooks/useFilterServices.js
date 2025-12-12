@@ -1,10 +1,10 @@
 import { useMemo } from 'react'
-import { useServices } from '../context/ServicesContext'
+import { useServicesContext } from '../context/ServicesContext'
 import { useSearch } from '../context/SearchContext'
 
 
 export default function useFilterServices() {
-const { services } = useServices()
+const { services } = useServicesContext()
 const { query, filters } = useSearch()
 
 

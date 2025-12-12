@@ -1,9 +1,9 @@
 import useCarousel from '../../hooks/useCarousel'
-import { useServices } from '../../context/ServicesContext'
+import { useServicesContext } from '../../context/ServicesContext'
 
 
 export default function ServicesCarousel() {
-const { services } = useServices()
+const { services } = useServicesContext()
 const featured = services.slice(0, 5)
 const { index } = useCarousel(featured, 3500)
 
