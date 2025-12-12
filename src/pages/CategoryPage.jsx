@@ -30,8 +30,6 @@ export default function CategoryPage(){
     }
   },[location.search, setGlobalQuery])
 
-  if(!category) return <NotFound />
-
   // compute unique tags/types for this category
   const tags = useMemo(()=>{
     const set = new Set()
@@ -55,8 +53,18 @@ export default function CategoryPage(){
     })
   },[list, selectedTags, titleQuery])
 
+  // Show NotFound if category doesn't exist
+  if (categories.length === 0) {
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="py-20 text-center text-gray-500">
+      Loading...
+    </div>
+  )
+}
+  if(!category) return <NotFound />
+
+  return (
+    <div className="max-w-7xl mx-auto mb-10">
 
       <Banner
         bg={category.banner}
@@ -77,7 +85,13 @@ export default function CategoryPage(){
 
         <div className="lg:col-span-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map(s=> <ServiceCard key={s.slug} service={s} />)}
+              {filtered.length === 0 ? (
+                <p className="text-gray-500 text-lg col-span-full text-center py-10">
+                  No available posts now.
+                </p>
+              ) : (
+                filtered.map(s => <ServiceCard key={s.slug} service={s} />)
+              )}
           </div>
         </div>
       </div>

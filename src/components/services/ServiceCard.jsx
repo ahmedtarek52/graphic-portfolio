@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom'
 
 
 export default function ServiceCard({ service }){
+  const des = service.description.length > 100
+    ? service.description.slice(0, 100) + '...'
+    : service.description
 return (
 <Link 
   to={`/service/${service.slug}`} 
@@ -14,7 +17,7 @@ return (
   />
   <div className="p-4">
     <h3 className="font-semibold text-lg mb-1">{service.title}</h3>
-    <p className="text-sm text-neutral-500 mb-2">{service.description}</p>
+    <p className="text-sm text-neutral-500 mb-2">{des}</p>
     {/* <div className="flex items-center justify-between">
       <div className="text-primary font-bold text-lg">${service.price}</div>
       <div className="flex items-center gap-1">

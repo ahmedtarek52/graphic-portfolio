@@ -6,6 +6,7 @@ const links = [
   { label: "Dashboard", to: "/admin" },
   { label: "Services", to: "/admin/services" },
   { label: "Categories", to: "/admin/categories" },
+  { label: "Tags", to: "/admin/tags" },
   { label: "Settings", to: "/admin/settings" },
 ];
 

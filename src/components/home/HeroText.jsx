@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '../ui/Button'
 export const HeroText = () => {
+  const [activeCard, setActiveCard] = useState(1); // 1 for first card, 2 for second card
+
+  const toggleCards = () => {
+    setActiveCard(prev => prev === 1 ? 2 : 1);
+  };
+
   return (
         <section className="relative overflow-hidden bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950 py-20">
       {/* Background gradient accent */}
@@ -19,7 +25,7 @@ export const HeroText = () => {
               </p>
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
                 Make an incredible{" "}
-                <span className="bg-gradient-to-r from-purple-600 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+                <span className="purple-text">
                   experience
                 </span>
               </h1>
@@ -54,10 +60,28 @@ export const HeroText = () => {
             {/* Gradient cards with glass effect */}
             <div className="relative w-full h-full flex items-center justify-center">
               {/* Main card with gradient */}
-              <div className="absolute w-64 h-80 bg-gradient-to-br from-purple-500 via-purple-600 to-blue-500 rounded-3xl shadow-2xl transform -rotate-6 transition-transform hover:rotate-0 duration-300"></div>
+              <div 
+                className={`absolute w-64 h-80 bg-gradient-to-br from-purple-500 via-purple-600 to-blue-500 rounded-3xl shadow-2xl transform transition-all duration-300 cursor-pointer ${
+                  activeCard === 1 
+                    ? '-rotate-6 hover:rotate-0 z-10' 
+                    : 'rotate-12 scale-90 opacity-70 z-0'
+                }`}
+                onClick={toggleCards}
+              >
+                test text1
+              </div>
 
               {/* Secondary card */}
-              <div className="absolute w-64 h-80 bg-gradient-to-br from-blue-500 to-purple-700 rounded-3xl shadow-2xl transform rotate-6 transition-transform hover:rotate-0 duration-300 backdrop-blur-sm opacity-80"></div>
+              <div 
+                className={`absolute w-64 h-80 bg-gradient-to-br from-blue-500 to-purple-700 rounded-3xl shadow-2xl transform transition-all duration-300 cursor-pointer ${
+                  activeCard === 2 
+                    ? 'rotate-6 hover:rotate-0 z-10' 
+                    : '-rotate-12 scale-90 opacity-70 z-0'
+                }`}
+                onClick={toggleCards}
+              >
+                test text2
+              </div>
 
               {/* Accent elements */}
               <div className="absolute top-12 right-12 w-24 h-24 bg-white/20 backdrop-blur-md rounded-2xl border border-white/30 flex items-center justify-center">

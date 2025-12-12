@@ -8,16 +8,19 @@ import Textarea from "../../ui/Textarea";
 import Button from "../../ui/Button";
 import { useNavigate } from "react-router-dom";
 import { useCategories } from "../../../hooks/useCategories";
+import { useTags } from "../../../hooks/useTags";
 
 export default function AdminAddService() {
   const navigate = useNavigate();
   const categories = useCategories();
+  const tags = useTags();
   const [form, setForm] = useState({
     title: "",
     slug: "",
     category: "",
     description: "",
     link:"",
+    tags: [],
     coverUrl: "",
     gallery: [],
   });
@@ -39,6 +42,22 @@ export default function AdminAddService() {
     }));
   };
 
+  const handleTagChange = (tagName) => {
+    setForm(prev => {
+      if (prev.tags.includes(tagName)) {
+        return {
+          ...prev,
+          tags: prev.tags.filter(t => t !== tagName)
+        };
+      } else {
+        return {
+          ...prev,
+          tags: [...prev.tags, tagName]
+        };
+      }
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
@@ -56,6 +75,7 @@ export default function AdminAddService() {
       category: form.category,
       description: form.description,
       link: form.link || "",
+      tags: form.tags || [],
       coverUrl: form.coverUrl || "",
       gallery: form.gallery || [],
       createdAt: serverTimestamp(),
@@ -116,6 +136,27 @@ export default function AdminAddService() {
           value={form.link} 
           onChange={(e) => setForm({ ...form, link: e.target.value })} 
         />
+        
+        {/* Tags Selection */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Tags</label>
+          <div className="flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <label key={tag.id} className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={form.tags.includes(tag.name)}
+                  onChange={() => handleTagChange(tag.name)}
+                  className="rounded border-gray-300 text-purple-600 focus:ring-purple-500"
+                />
+                <span className="px-2 py-1 bg-gray-100 rounded-md text-sm">
+                  #{tag.name}
+                </span>
+              </label>
+            ))}
+          </div>
+        </div>
+
         <div>
           <p className="mb-2">Cover Image</p>
           <FileUploader multiple={false} onUploadComplete={handleUploadCover} />

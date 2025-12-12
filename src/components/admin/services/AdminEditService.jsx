@@ -6,11 +6,13 @@ import Input from "../../ui/Input";
 import Textarea from "../../ui/Textarea";
 import Button from "../../ui/Button";
 import { useCategories } from "../../../hooks/useCategories";
+import { useTags } from "../../../hooks/useTags";
 
 export default function AdminEditService() {
   const { id } = useParams();
   const navigate = useNavigate();
   const categories = useCategories();
+  const tags = useTags();
   
   const [form, setForm] = useState({
     title: "",
@@ -18,6 +20,7 @@ export default function AdminEditService() {
     category: "",
     description: "",
     link:"",
+    tags: [],
     coverUrl: "",
     gallery: [],
   });
@@ -36,6 +39,7 @@ export default function AdminEditService() {
           category: data.category || "",
           description: data.description || "",
           link: data.link || "",
+          tags: data.tags || [],
           coverUrl: data.coverUrl || "",
           gallery: data.gallery || [],
         });
@@ -65,6 +69,22 @@ export default function AdminEditService() {
     }));
   };
 
+  const handleTagChange = (tagName) => {
+    setForm(prev => {
+      if (prev.tags.includes(tagName)) {
+        return {
+          ...prev,
+          tags: prev.tags.filter(t => t !== tagName)
+        };
+      } else {
+        return {
+          ...prev,
+          tags: [...prev.tags, tagName]
+        };
+      }
+    });
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
@@ -87,6 +107,7 @@ export default function AdminEditService() {
       category: form.category,
       description: form.description,
       link: form.link || "",
+      tags: form.tags || [],
       coverUrl: form.coverUrl || "",
       gallery: form.gallery || [],
     };
@@ -133,7 +154,7 @@ export default function AdminEditService() {
           >
             <option value="">Select a category</option>
             {categories.map((cat) => (
-              <option key={cat.id} value={cat.name}>
+              <option key={cat.id} value={cat.slug}>
                 {cat.name}
               </option>
             ))}
@@ -153,6 +174,26 @@ export default function AdminEditService() {
           value={form.link} 
           onChange={handleChange} 
         />
+        
+        {/* Tags Selection */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Tags</label>
+          <div className="flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <label key={tag.id} className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={form.tags.includes(tag.name)}
+                  onChange={() => handleTagChange(tag.name)}
+                  className="rounded border-gray-300 text-purple-600 focus:ring-purple-500"
+                />
+                <span className="px-2 py-1 bg-gray-100 rounded-md text-sm">
+                  #{tag.name}
+                </span>
+              </label>
+            ))}
+          </div>
+        </div>
 
         <div>
           <p className="mb-2">Cover Image</p>

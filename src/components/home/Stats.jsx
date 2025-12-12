@@ -54,7 +54,7 @@ export default function Stats() {
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#9333ea]/0 to-[#0044ff]/0 group-hover:from-[#9333ea]/5 group-hover:to-[#0044ff]/5 transition-all duration-300" />
 
               <div className="relative">
-                <h3 className="text-5xl font-bold bg-gradient-to-r from-[#a855f7] to-[#0044ff] bg-clip-text text-transparent mb-3">
+                <h3 className="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-[#a855f7] to-[#0044ff] bg-clip-text text-transparent mb-3">
                   {stat.metric}
                 </h3>
                 <p className="text-foreground font-semibold mb-2">{stat.description}</p>

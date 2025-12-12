@@ -2,8 +2,7 @@ import ContactForm from "../components/forms/ContactForm";
 
 export default function Contact(){
 return (
-    <main className="min-h-screen bg-background">
-      <div className="pt-24 pb-16">
+<div className="py-10">
         {/* Hero Section */}
         <section className="px-6 mb-16">
           <div className="max-w-6xl mx-auto text-center">
@@ -47,7 +46,6 @@ return (
             </div>
           </div>
         </section>
-      </div>
-    </main>
+ </div>
 )
 }

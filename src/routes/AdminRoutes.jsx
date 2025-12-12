@@ -12,6 +12,7 @@ import AdminAddCategory from "../components/admin/categories/AdminAddCategory";
 import AdminSettings from "../components/admin/settings/AdminSettings";
 import AdminLayout from "../components/admin/layout/AdminLayout";
 import AdminEditCategory from "../components/admin/categories/AdminEditCategory";
+import AdminTags from "../components/admin/tags/AdminTags";
 
 export default function AdminRoutes() {
   return (
@@ -34,6 +35,7 @@ export default function AdminRoutes() {
         <Route path="categories" element={<AdminCategoriesList />} />
         <Route path="categories/add" element={<AdminAddCategory />} />
         <Route path="categories/edit/:id" element={<AdminEditCategory />} />
+        <Route path="tags" element={<AdminTags/>} />
         <Route path="settings" element={<AdminSettings />} />
       </Route>
     </Routes>

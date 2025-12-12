@@ -20,7 +20,7 @@ export default function CategoriesGrid() {
 
       {/* Title */}
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-4xl font-heading font-semibold">Explore Categories</h2>
+        <h2 className="text-5xl font-heading font-bold pb-5">Explore <span className="purple-text">Categories</span></h2>
 
         {/* Arrows */}
         <div className="flex gap-3">

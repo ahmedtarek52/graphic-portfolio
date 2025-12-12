@@ -3,13 +3,13 @@ import Button from "../ui/Button"
 import Input from "../ui/Input"
 import Textarea from "../ui/Textarea"
 import { AlertCircle, CheckCircle2 } from "lucide-react"
+import { saveContactSubmission } from "../../firebase/contact"
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    subject: "",
     message: "",
   })
 
@@ -32,12 +32,11 @@ export default function ContactForm() {
       newErrors.email = "Please enter a valid email"
     }
 
-    if (formData.phone && !/^\+?[\d\s\-()]+$/.test(formData.phone)) {
-      newErrors.phone = "Please enter a valid phone number"
-    }
-
-    if (!formData.subject.trim()) {
-      newErrors.subject = "Subject is required"
+    // Enhanced phone validation - only allow digits, spaces, dashes, parentheses and plus sign
+    if (formData.phone && !/^[\d\s\-\+\(\)]+$/.test(formData.phone)) {
+      newErrors.phone = "Phone number can only contain digits, spaces, dashes, parentheses and plus sign"
+    } else if (formData.phone && formData.phone.replace(/\D/g, '').length < 7) {
+      newErrors.phone = "Phone number must be at least 7 digits"
     }
 
     if (!formData.message.trim()) {
@@ -69,21 +68,21 @@ export default function ContactForm() {
     setSubmitStatus("idle")
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      // Save to Firestore
+      await saveContactSubmission(formData)
       
       // Reset form
       setFormData({
         name: "",
         email: "",
         phone: "",
-        subject: "",
         message: "",
       })
       
       setSubmitStatus("success")
       setSubmitMessage("Thank you! Your message has been sent successfully.")
     } catch (error) {
+      console.error("Error submitting form:", error)
       setSubmitStatus("error")
       setSubmitMessage("Oops! Something went wrong. Please try again.")
     } finally {
@@ -174,27 +173,6 @@ export default function ContactForm() {
         )}
       </div>
 
-      {/* Subject Field */}
-      <div>
-        <Input
-          id="subject"
-          name="subject"
-          type="text"
-          label="Subject *"
-          value={formData.subject}
-          onChange={handleChange}
-          placeholder="What is this about?"
-          ariaRequired="true"
-          ariaInvalid={!!errors.subject}
-          ariaDescribedby={errors.subject ? "subject-error" : undefined}
-          className={errors.subject ? "border-red-500" : ""}
-        />
-        {errors.subject && (
-          <p id="subject-error" className="text-red-500 text-sm mt-1" role="alert">
-            {errors.subject}
-          </p>
-        )}
-      </div>
 
       {/* Message Field */}
       <div>

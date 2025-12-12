@@ -33,6 +33,18 @@ export default function AdminServicesList() {
             <div className="flex-1">
               <h3 className="font-semibold">{s.title}</h3>
               <p className="text-sm text-gray-500">{s.description?.slice(0, 80)}</p>
+              
+              {/* Display tags */}
+              {s.tags && s.tags.length > 0 && (
+                <div className="flex flex-wrap gap-1 mt-2">
+                  {s.tags.map((tag, index) => (
+                    <span key={index} className="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+              
               <div className="mt-3 flex gap-2">
                 <Link to={`/admin/services/edit/${s.id}`}>
                   <Button variant="outline">Edit</Button>
