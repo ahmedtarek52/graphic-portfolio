@@ -3,12 +3,12 @@ import { FaFacebookF, FaTwitter, FaGoogle, FaInstagram, FaLinkedin, FaGithub } f
 
 export default function Footer() {
   const socialLinks = [
-    { icon: <FaFacebookF />, href: "#" },
-    { icon: <FaTwitter />, href: "#" },
-    { icon: <FaGoogle />, href: "#" },
-    { icon: <FaInstagram />, href: "#" },
-    { icon: <FaLinkedin />, href: "#" },
-    { icon: <FaGithub />, href: "#" },
+    { icon: <FaFacebookF />, href: "#", platform: "Facebook" },
+    { icon: <FaTwitter />, href: "#", platform: "Twitter" },
+    { icon: <FaGoogle />, href: "#", platform: "Google" },
+    { icon: <FaInstagram />, href: "#", platform: "Instagram" },
+    { icon: <FaLinkedin />, href: "#", platform: "Linkedin" },
+    { icon: <FaGithub />, href: "#", platform: "Github" },
   ];
 
   const pages = [
@@ -33,7 +33,8 @@ export default function Footer() {
             <a
               key={i}
               href={s.href}
-              className="hover:text-gray-200 transition-colors"
+              className="hover:text-white transition-colors"
+              aria-label={`Visit our ${s.platform} page`}
             >
               {s.icon}
             </a>
@@ -47,7 +48,7 @@ export default function Footer() {
 
           {/* Brand Section */}
           <div>
-            <h6 className="uppercase font-bold text-lg mb-2">amr</h6>
+            <h6 className="uppercase font-bold text-lg mb-2">Junto</h6>
             <div className="w-16 h-[2px] bg-indigo-500 mb-4"></div>
             <p className="text-gray-300 text-sm leading-relaxed">
               Join us in making a difference. Whether through donations,
@@ -80,7 +81,7 @@ export default function Footer() {
 
             {useful.map((u, i) => (
               <p key={i} className="mb-2">
-                <a href="#" className="text-gray-300 hover:text-white transition">
+                <a href="#" className="text-gray-300 hover:text-white transition" aria-label={u}>
                   {u}
                 </a>
               </p>
@@ -93,7 +94,7 @@ export default function Footer() {
             <div className="w-16 h-[2px] bg-indigo-500 mb-4"></div>
 
             <p className="text-gray-300 mb-2">📍 Egypt, Menofia, US</p>
-            <p className="text-gray-300 mb-2">📧 amr@example.com</p>
+            <p className="text-gray-300 mb-2">📧 junto@example.com</p>
             <p className="text-gray-300 mb-2">📞 +01 234 567 88</p>
             <p className="text-gray-300">📠 +01 234 567 89</p>
           </div>
@@ -103,8 +104,8 @@ export default function Footer() {
       {/* Copyright */}
       <div className="text-center py-4 bg-black/20 text-sm">
         © 2025 Copyright:
-        <a className="text-white ml-1 hover:underline" href="#">
-          amr.com
+        <a className="text-white ml-1 hover:underline" href="#" aria-label="Visit junto.com">
+          junto.com
         </a>
       </div>
     </footer>

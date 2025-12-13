@@ -3,9 +3,9 @@ import SearchBar from "./SearchBar";
 
 export default function Hero() {
   const images = [
-    "/assets/hero/hero1.png",
-    "/assets/hero/hero2.png",
-    "/assets/hero/hero3.png",
+    "https://avatars.mds.yandex.net/i?id=bd47f43e2833648f8d1777ba964e89c04dc9b0fe-5354001-images-thumbs&n=13",
+    "https://static.vecteezy.com/system/resources/thumbnails/035/318/414/original/professional-camera-equipment-used-bygrapher-to-teach-internet-viewers-to-create-visual-effects-for-projects-recording-gear-used-by-expert-filming-online-tutorial-about-editing-footage-video.jpg",
+    "https://avatars.mds.yandex.net/i?id=a052f258162a84e3a1dd54e3f1f204112016acce-9459492-images-thumbs&n=13",
   ];
 
   const [index, setIndex] = useState(0);
@@ -13,7 +13,7 @@ export default function Hero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % images.length);
-    }, 5000); // change image every 5s
+    }, 3000); // change image every 5s
 
     return () => clearInterval(interval);
   }, []);
@@ -29,6 +29,7 @@ export default function Hero() {
           <img
             key={i}
             src={img}
+            alt={`Hero background ${i + 1}`}
             loading="lazy"
             className={`
               absolute inset-0 w-full h-full object-cover transition-all duration-[2500ms] ease-out

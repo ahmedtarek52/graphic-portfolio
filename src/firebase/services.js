@@ -11,7 +11,7 @@ export async function getServices() {
     const snapshot = await getDocs(collection(db, "services"));
     return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   } catch (err) {
-    console.error("Failed to fetch services:", err);
+    // console.error("Failed to fetch services:", err);
     throw err;
   }
 }

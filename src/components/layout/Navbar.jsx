@@ -16,7 +16,7 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3">
-          <img src="/assets/icons/logo.png" alt="Logo" loading="lazy" className="w-9 h-9" />
+          <img src="/assets/icons/logo.png" alt="Logo" className="w-9 h-9" />
           <span className="font-semibold text-lg">YourCompany</span>
         </Link>
         {/* Desktop Menu */}
@@ -30,6 +30,8 @@ export default function Navbar() {
         <button
           className="md:hidden text-3xl text-neutral-700"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isOpen}
         >
           {isOpen ? "✖" : "☰"}
         </button>
@@ -39,7 +41,6 @@ export default function Navbar() {
       {isOpen && (
         <nav className="md:hidden  border-t shadow-sm flex flex-col px-6 py-4 gap-4">
           {navItems.map((item)=>(
-
           <NavLink 
             to={item.href}
             key={item.href}
@@ -48,7 +49,6 @@ export default function Navbar() {
            {item.label}
           </NavLink>
           ))}
-
         </nav>
       )}
     </header>

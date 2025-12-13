@@ -1,11 +1,13 @@
 import Banner from "../components/ui/Banner";
-import aboutBanner from "../../public/assets/images/about-us.jpg";
+// import aboutBanner from "../../public/assets/images/about-us.jpg";
 import Badge from "../components/ui/Badge";
 import { ArrowRight, Zap, Heart, Target, Users } from "lucide-react"
 import Stats from "../components/home/Stats";
 import ChooseUs from "../components/home/ChooseUs";
+import Video from "../components/home/Video";
 
 export default function About(){
+  const aboutBanner = "https://avatars.mds.yandex.net/i?id=c1115ffb3500122fc5b3b1c3aff712285d59e557-12513999-images-thumbs&n=13"
      const teamMembers = [
     {
       id: 1,
@@ -107,7 +109,7 @@ return (
           </div>
         </section>
 
-         <section className="py-20 px-6">
+         <section className="py-10 px-6">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl font-bold text-center mb-16">Our Core Values</h2>
 
@@ -144,8 +146,12 @@ return (
             </div>
           </div>
         </section>
-<Badge/>
-<Stats/>
+ <Video 
+   title="About Us"
+   description="A short look into our journey, our values, and the passion behind our work."
+   src="https://www.youtube.com/embed/fU36hJKJd4I?rel=0&showinfo=0&modestbranding=1"
+   />
+   <Stats/>
         {/* Team Section */}
         <section className="py-10 px-6">
           <div className="max-w-6xl mx-auto">
@@ -173,18 +179,7 @@ return (
                   <div className="p-6">
                     <h3 className="font-bold text-lg">{member.name}</h3>
                     <p className="text-sm text-purple-600 dark:text-purple-400 font-semibold mb-2">{member.role}</p>
-                    <p className="text-sm text-muted-foreground mb-4">{member.bio}</p>
-                    <div className="flex gap-3">
-                      {member.socials.map((social, idx) => (
-                        <a
-                          key={idx}
-                          href="#"
-                          className="w-8 h-8 rounded-full bg-secondary hover:bg-purple-600 hover:text-white transition-colors flex items-center justify-center text-sm"
-                        >
-                          {social.charAt(0).toUpperCase()}
-                        </a>
-                      ))}
-                    </div>
+                    <p className="text-sm text-muted-foreground mb-4">{member.bio}</p>               
                   </div>
                 </div>
               ))}

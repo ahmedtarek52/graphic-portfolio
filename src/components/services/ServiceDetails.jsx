@@ -44,6 +44,7 @@ export default function ServiceDetails({ service }) {
           href={`/category/${service.category}`}
           className="inline-flex items-center gap-2 text-slate-600 hover:text-slate-900 
                     transition-colors text-sm font-medium"
+          aria-label={`Back to ${service.category} category`}
         >
           {/* Small Back Arrow Icon */}
           <svg
@@ -143,6 +144,7 @@ export default function ServiceDetails({ service }) {
             <button
               onClick={() => setShowModal(false)}
               className="absolute -top-10 right-0 text-white hover:text-gray-300 transition-colors z-10"
+              aria-label="Close image viewer"
             >
               <X size={32} />
             </button>
@@ -160,6 +162,7 @@ export default function ServiceDetails({ service }) {
               <button
                 onClick={handlePrevImage}
                 className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-110 backdrop-blur-sm"
+                aria-label="Previous image"
               >
                 <ChevronLeft size={24} />
               </button>
@@ -168,6 +171,7 @@ export default function ServiceDetails({ service }) {
               <button
                 onClick={handleNextImage}
                 className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-110 backdrop-blur-sm"
+                aria-label="Next image"
               >
                 <ChevronRight size={24} />
               </button>
@@ -189,6 +193,7 @@ export default function ServiceDetails({ service }) {
                       ? "border-white"
                       : "border-white/30 hover:border-white/60"
                   }`}
+                  aria-label={`View image ${idx + 1}`}
                 >
                   <img
                     src={img || "/placeholder.svg"}
@@ -221,6 +226,7 @@ export default function ServiceDetails({ service }) {
             className="inline-block mt-6 px-5 py-2 rounded-lg
                  border border-[#9333ea] purple-text
       hover:purple-gradient hover:text-white"
+            aria-label="View demo in new tab"
           >
             🔗 View Demo
           </a>

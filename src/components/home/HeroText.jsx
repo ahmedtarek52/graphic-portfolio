@@ -23,12 +23,12 @@ export const HeroText = () => {
               <p className="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wide mb-3">
                 Create with ease
               </p>
-              <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
+              <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
                 Make an incredible{" "}
                 <span className="purple-text">
                   experience
                 </span>
-              </h1>
+              </h2>
             </div>
 
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-md">
@@ -61,33 +61,34 @@ export const HeroText = () => {
             <div className="relative w-full h-full flex items-center justify-center">
               {/* Main card with gradient */}
               <div 
-                className={`absolute w-64 h-80 bg-gradient-to-br from-purple-500 via-purple-600 to-blue-500 rounded-3xl shadow-2xl transform transition-all duration-300 cursor-pointer ${
+                className={`absolute p-1 bg-gradient-to-br from-purple-500 via-purple-600 to-blue-500 rounded-3xl shadow-2xl transform transition-all duration-300 cursor-pointer ${
                   activeCard === 1 
                     ? '-rotate-6 hover:rotate-0 z-10' 
                     : 'rotate-12 scale-90 opacity-70 z-0'
                 }`}
                 onClick={toggleCards}
               >
-                test text1
+                <div className='fkex justify-center items-center rounded-3xl overflow-hidden '>
+
+               <img src="https://www.unisender.com/ru/blog/wp-content/uploads/2025/06/6-soda.png" alt="Design showcase example 1"  className='w-full h-full object-cover' />
+                </div>
               </div>
 
               {/* Secondary card */}
               <div 
-                className={`absolute w-64 h-80 bg-gradient-to-br from-blue-500 to-purple-700 rounded-3xl shadow-2xl transform transition-all duration-300 cursor-pointer ${
+                className={`absolute p-1 bg-gradient-to-br from-blue-500 to-purple-700 rounded-3xl shadow-2xl transform transition-all duration-300 cursor-pointer ${
                   activeCard === 2 
                     ? 'rotate-6 hover:rotate-0 z-10' 
                     : '-rotate-12 scale-90 opacity-70 z-0'
                 }`}
                 onClick={toggleCards}
               >
-                test text2
+                               <div className='fkex justify-center items-center rounded-3xl overflow-hidden '>
+
+               <img src="https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTEwL3Jhd3BpeGVsb2ZmaWNlOV9oYW5kX2hvbGRfdXBfd2hpdGVfY2FuX3BhY2thZ2luZ193aXRoX21hdHRfdGV4dF8zZWFmOGRlMC1lZDRiLTQ4ZDktODZhYS01MTE2Y2MwODQ0MzQtcm03MTUtbW9ja3VwXzEuanBn.jpg" alt="Design showcase example 2"  className='w-full h-full object-cover' />
+                </div>
               </div>
 
-              {/* Accent elements */}
-              <div className="absolute top-12 right-12 w-24 h-24 bg-white/20 backdrop-blur-md rounded-2xl border border-white/30 flex items-center justify-center">
-                <span className="text-4xl">✨</span>
-              </div>
-              <div className="absolute bottom-12 left-12 w-20 h-20 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md rounded-full border border-white/20"></div>
             </div>
           </div>
         </div>

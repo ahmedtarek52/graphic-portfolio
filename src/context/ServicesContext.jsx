@@ -5,11 +5,17 @@ import { useCategories } from '../hooks/useCategories'
 const ServicesContext = createContext(null)
 
 export function ServicesProvider({ children }) {
-  const services = useServices()
-  const categories = useCategories()
+  const { services, loading: servicesLoading, error: servicesError } = useServices()
+  const { categories, loading: categoriesLoading, error: categoriesError } = useCategories()
 
   return (
-    <ServicesContext.Provider value={{ services, categories }}>
+    <ServicesContext.Provider value={{ 
+      services, 
+      categories,
+      loading: servicesLoading || categoriesLoading,
+      servicesError,
+      categoriesError
+    }}>
       {children}
     </ServicesContext.Provider>
   )

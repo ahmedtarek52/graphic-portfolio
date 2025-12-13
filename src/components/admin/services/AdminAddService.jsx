@@ -12,7 +12,7 @@ import { useTags } from "../../../hooks/useTags";
 
 export default function AdminAddService() {
   const navigate = useNavigate();
-  const categories = useCategories();
+  const { categories, loading: categoriesLoading, error: categoriesError } = useCategories();
   const tags = useTags();
   const [form, setForm] = useState({
     title: "",
@@ -110,19 +110,25 @@ export default function AdminAddService() {
         />
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Category *</label>
-          <select
-            value={form.category}
-            onChange={(e) => setForm({ ...form, category: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
-            required
-          >
-            <option value="">Select a category</option>
-            {categories.map((cat) => (
-              <option key={cat.id} value={cat.name}>
-                {cat.name}
-              </option>
-            ))}
-          </select>
+          {categoriesLoading ? (
+            <p>Loading categories...</p>
+          ) : categoriesError ? (
+            <p className="text-red-500">Error loading categories: {categoriesError}</p>
+          ) : (
+            <select
+              value={form.category}
+              onChange={(e) => setForm({ ...form, category: e.target.value })}
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+              required
+            >
+              <option value="">Select a category</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.name}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+          )}
         </div>
         <Textarea 
           label="Description *" 
@@ -160,7 +166,7 @@ export default function AdminAddService() {
         <div>
           <p className="mb-2">Cover Image</p>
           <FileUploader multiple={false} onUploadComplete={handleUploadCover} />
-          {form.coverUrl && <img src={form.coverUrl} className="w-40 h-28 object-cover rounded mt-2" />}
+          {form.coverUrl && <img src={form.coverUrl} alt="Service cover" className="w-40 h-28 object-cover rounded mt-2" />}
         </div>
 
         <div>
@@ -169,11 +175,12 @@ export default function AdminAddService() {
           <div className="flex gap-2 mt-2 flex-wrap">
             {form.gallery?.map((g, i) => (
               <div key={i} className="relative">
-                <img src={g} className="w-20 h-14 object-cover rounded" />
+                <img src={g} alt={`Gallery image ${i + 1}`} className="w-20 h-14 object-cover rounded" />
                 <button
                   type="button"
                   onClick={() => handleRemoveGalleryImage(i)}
                   className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                  aria-label={`Remove image ${i + 1}`}
                 >
                   ×
                 </button>

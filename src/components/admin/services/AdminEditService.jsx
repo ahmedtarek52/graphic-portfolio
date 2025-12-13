@@ -11,7 +11,7 @@ import { useTags } from "../../../hooks/useTags";
 export default function AdminEditService() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const categories = useCategories();
+  const { categories, loading: categoriesLoading, error: categoriesError } = useCategories();
   const tags = useTags();
   
   const [form, setForm] = useState({
@@ -43,11 +43,12 @@ export default function AdminEditService() {
           coverUrl: data.coverUrl || "",
           gallery: data.gallery || [],
         });
-        setLoading(false);
       } catch (err) {
-        console.error(err);
+        console.error("Failed to load service:", err);
         alert("Failed to load service");
         navigate("/admin/services");
+      } finally {
+        setLoading(false);
       }
     }
     load();
@@ -58,7 +59,6 @@ export default function AdminEditService() {
   };
 
   const handleUploadGallery = (urls) => {
-    // Append new images to existing gallery instead of replacing
     setForm((p) => ({ ...p, gallery: [...p.gallery, ...(Array.isArray(urls) ? urls : [urls])] }));
   };
 
@@ -85,11 +85,6 @@ export default function AdminEditService() {
     });
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
@@ -114,11 +109,11 @@ export default function AdminEditService() {
     
     try {
       await updateService(id, payload);
+      setSaving(false);
       navigate("/admin/services");
     } catch (error) {
       console.error("Error updating service: ", error);
       alert("Error updating service. Please try again.");
-    } finally {
       setSaving(false);
     }
   };
@@ -132,47 +127,48 @@ export default function AdminEditService() {
       <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl">
         <Input 
           label="Title *" 
-          name="title"
           value={form.title} 
-          onChange={handleChange} 
+          onChange={(e) => setForm({ ...form, title: e.target.value })} 
           required
         />
         <Input 
           label="Slug (optional)" 
-          name="slug"
           value={form.slug} 
-          onChange={handleChange} 
+          onChange={(e) => setForm({ ...form, slug: e.target.value })} 
         />
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Category *</label>
-          <select
-            name="category"
-            value={form.category}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
-            required
-          >
-            <option value="">Select a category</option>
-            {categories.map((cat) => (
-              <option key={cat.id} value={cat.slug}>
-                {cat.name}
-              </option>
-            ))}
-          </select>
+          {categoriesLoading ? (
+            <p>Loading categories...</p>
+          ) : categoriesError ? (
+            <p className="text-red-500">Error loading categories: {categoriesError}</p>
+          ) : (
+            <select
+              value={form.category}
+              onChange={(e) => setForm({ ...form, category: e.target.value })}
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+              required
+            >
+              <option value="">Select a category</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.name}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+          )}
         </div>
         <Textarea 
           label="Description *" 
-          name="description"
           value={form.description} 
-          onChange={handleChange} 
+          onChange={(e) => setForm({ ...form, description: e.target.value })} 
           required
         />
         <Input 
           label="Link (optional)" 
           type="string" 
-          name="link"
           value={form.link} 
-          onChange={handleChange} 
+          onChange={(e) => setForm({ ...form, link: e.target.value })} 
         />
         
         {/* Tags Selection */}
@@ -198,7 +194,7 @@ export default function AdminEditService() {
         <div>
           <p className="mb-2">Cover Image</p>
           <FileUploader multiple={false} onUploadComplete={handleUploadCover} />
-          {form.coverUrl && <img src={form.coverUrl} className="w-40 h-28 object-cover rounded mt-2" />}
+          {form.coverUrl && <img src={form.coverUrl} alt="Service cover" className="w-40 h-28 object-cover rounded mt-2" />}
         </div>
 
         <div>
@@ -207,11 +203,12 @@ export default function AdminEditService() {
           <div className="flex gap-2 mt-2 flex-wrap">
             {form.gallery?.map((g, i) => (
               <div key={i} className="relative">
-                <img src={g} className="w-20 h-14 object-cover rounded" />
+                <img src={g} alt={`Gallery image ${i + 1}`} className="w-20 h-14 object-cover rounded" />
                 <button
                   type="button"
                   onClick={() => handleRemoveGalleryImage(i)}
                   className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                  aria-label={`Remove image ${i + 1}`}
                 >
                   ×
                 </button>
@@ -225,9 +222,9 @@ export default function AdminEditService() {
           )}
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex gap-2">
           <Button type="submit" className="bg-purple-600 text-white" disabled={saving}>
-            {saving ? "Saving..." : "Save Changes"}
+            {saving ? "Saving..." : "Update Service"}
           </Button>
           <Button 
             type="button" 

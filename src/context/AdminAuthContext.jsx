@@ -18,7 +18,7 @@ export function AdminAuthProvider({ children }) {
     const unsub = onAuthStateChanged(auth, async (u) => {
       // debug: log auth state changes
       // eslint-disable-next-line no-console
-      console.log("onAuthStateChanged -> user:", u);
+      // console.log("onAuthStateChanged -> user:", u);
       setUser(u);
 
       if (u) {
@@ -26,7 +26,7 @@ export function AdminAuthProvider({ children }) {
           // Check admins collection in Firestore for admin status
           const adminDoc = await getDoc(doc(db, "admins", u.uid));
           // eslint-disable-next-line no-console
-          console.log("adminDoc exists:", adminDoc.exists(), "isAdmin:", adminDoc.exists() && adminDoc.data()?.isAdmin === true);
+          // console.log("adminDoc exists:", adminDoc.exists(), "isAdmin:", adminDoc.exists() && adminDoc.data()?.isAdmin === true);
           setIsAdmin(adminDoc.exists() && adminDoc.data()?.isAdmin === true);
         } catch (err) {
           // eslint-disable-next-line no-console
