@@ -151,7 +151,7 @@ export default function AdminEditService() {
             >
               <option value="">Select a category</option>
               {categories.map((cat) => (
-                <option key={cat.id} value={cat.name}>
+                <option key={cat.id} value={cat.slug}>
                   {cat.name}
                 </option>
               ))}
